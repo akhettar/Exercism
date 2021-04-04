@@ -44,7 +44,7 @@ var successTestCases = []struct {
 				{ID: 2},
 			},
 		},
-	},   
+	},
 	{
 		name: "three nodes in reverse order",
 		input: []Record{
@@ -173,15 +173,15 @@ var failureTestCases = []struct {
 			{ID: 0, Parent: 0},
 		},
 	},
-	// {
-	// 	name: "non-continuous",
-	// 	input: []Record{
-	// 		{ID: 2, Parent: 0},
-	// 		{ID: 4, Parent: 2},
-	// 		{ID: 1, Parent: 0},
-	// 		{ID: 0},
-	// 	},
-	// },
+	{
+		name: "non-continuous",
+		input: []Record{
+			{ID: 2, Parent: 0},
+			{ID: 4, Parent: 2},
+			{ID: 1, Parent: 0},
+			{ID: 0},
+		},
+	},
 	{
 		name: "cycle directly",
 		input: []Record{
@@ -240,7 +240,6 @@ func TestMakeTreeSuccess(t *testing.T) {
 func TestMakeTreeFailure(t *testing.T) {
 	for _, tt := range failureTestCases {
 		t.Run(tt.name, func(t *testing.T) {
-			fmt.Println(tt.name)
 			actual, err := Build(tt.input)
 			if err == nil {
 				t.Fatalf("Build for test case %q returned %s but was expected to fail.",
